@@ -72,3 +72,34 @@ test('User should able to book a schedule', async ({ page }) => {
   await deallsPages.seeDetailRequestButton.click();
   await expect(page.getByText("Sesi Saya")).toBeVisible();
 });
+
+test('User should able to search mentor by name', async ({ page }) => {
+  const deallsPages = new deallsPage(page);
+
+  // Sign In Process
+  await signIn(page);
+
+  // Filter By Readiness - Paling Relevan
+  await expect(deallsPages.searchMentorFields).toBeVisible();
+  await deallsPages.searchMentorFields.fill("Cika");
+  await expect(page.getByText("Cika").nth(0)).toBeVisible();
+});
+
+test('User should able using Filter By Readiness', async ({ page }) => {
+  const deallsPages = new deallsPage(page);
+
+  // Sign In Process
+  await signIn(page);
+
+  // Filter By Readiness - Paling Relevan
+  await expect(deallsPages.filterByReadiness).toBeVisible();
+  await deallsPages.filterByReadiness.click();
+  await deallsPages.palingRelevanOption.click();
+  await expect(deallsPages.palingRelevanOption).toHaveAttribute('aria-selected', 'true');
+
+  // Filter By Readiness - Ketersediaan Terdekat
+  await expect(deallsPages.filterByReadiness.nth(0)).toBeVisible();
+  await deallsPages.filterByReadiness.nth(0).click();
+  await deallsPages.ketersediaanTerdekat.click();
+  await expect(deallsPages.ketersediaanTerdekat).toHaveAttribute('aria-selected', 'true');
+});
