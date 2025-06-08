@@ -16,6 +16,11 @@ test('User should able to book a schedule', async ({ page }) => {
   await deallsPages.filterByReadiness.nth(0).click();
   await deallsPages.ketersediaanTerdekat.click();
   await expect(deallsPages.ketersediaanTerdekat).toHaveAttribute('aria-selected', 'true');
+  
+  // Filter By Name
+  await expect(deallsPages.searchMentorFields).toBeVisible();
+  await deallsPages.searchMentorFields.fill("Irvan");
+  await expect(page.getByText("Irvan").nth(0)).toBeVisible();
 
   // Choose the first mentor
   await expect(deallsPages.mentorCard.nth(0)).toBeVisible();
@@ -79,7 +84,7 @@ test('User should able to search mentor by name', async ({ page }) => {
   // Sign In Process
   await signIn(page);
 
-  // Filter By Readiness - Paling Relevan
+  // Filter By Name
   await expect(deallsPages.searchMentorFields).toBeVisible();
   await deallsPages.searchMentorFields.fill("Cika");
   await expect(page.getByText("Cika").nth(0)).toBeVisible();

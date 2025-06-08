@@ -39,3 +39,10 @@ npx playwright install
 
 ### 4. Run tests
 npx playwright test
+
+
+### 5. List of the sceanrio
+- Sign in
+- User should able to book a schedule
+- User should able to search mentor by name
+- User should able using Filter By Readiness
